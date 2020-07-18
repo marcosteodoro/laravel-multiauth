@@ -1,0 +1,31 @@
+# v3 syntax
+version: '3'
+
+# Named volumes
+volumes:
+  # MariaDB Data
+  laravel-multiauth-mariadb-data:
+    driver: local
+
+services:
+  db:
+    image: mariadb:10.5
+    volumes:
+      - laravel-multiauth-mariadb-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor
+      - MYSQL_DATABASE=mydb
+    ports:
+      - 3306:3306
+
+  # PHP (with Nginx)
+  app:
+    image: ambientum/php:7.4-nginx
+    container_name: laravel-multiauth-app
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "8080:8080"
+      - "8083:8083"
+    links:
+      - db
