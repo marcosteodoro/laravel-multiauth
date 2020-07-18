@@ -14,7 +14,7 @@ services:
       - laravel-multiauth-mariadb-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=toor
-      - MYSQL_DATABASE=mydb
+      - MYSQL_DATABASE=laravel_multiauth
     ports:
       - 3306:3306
 
